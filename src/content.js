@@ -4,7 +4,7 @@ function getVisibleMessages() {
   const messages = [];
 
   const elements = document.querySelectorAll(
-    '[data-pre-plain-text]'
+    "[data-pre-plain-text]"
   );
 
   elements.forEach((element) => {
@@ -23,4 +23,15 @@ function getVisibleMessages() {
   return messages;
 }
 
-console.log("ChatScribe visible messages:", getVisibleMessages());
+chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
+  if (message?.type !== "GET_VISIBLE_MESSAGES") {
+    return;
+  }
+
+  const messages = getVisibleMessages();
+
+  sendResponse({
+    success: true,
+    messages: messages
+  });
+});
