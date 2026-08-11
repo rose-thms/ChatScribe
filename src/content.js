@@ -35,3 +35,4 @@ chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
     messages: messages
   });
 });
+console.log("ChatScribe reader is ready.");

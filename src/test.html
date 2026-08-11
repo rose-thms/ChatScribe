@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>ChatScribe Parser Test</title>
+</head>
+
+<body>
+
+  <div id="chat">
+
+    <div data-pre-plain-text="[10:30, 11/08/2026] Alice: ">
+      Hello! How are you?
+    </div>
+
+    <div data-pre-plain-text="[10:31, 11/08/2026] Bob: ">
+      I'm good. Thanks!
+    </div>
+
+    <div data-pre-plain-text="[10:32, 11/08/2026] Alice: ">
+      Great 👍
+    </div>
+
+  </div>
+
+  <script src="parser.js"></script>
+
+  <script>
+    const messages = parseChatMessages();
+
+    console.log("Parsed ChatScribe messages:");
+    console.table(messages);
+  </script>
+
+</body>
+</html>
