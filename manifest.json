@@ -22,12 +22,10 @@
       "matches": [
         "https://web.whatsapp.com/*"
       ],
-"js": [
-  "src/parser.js",
-  "src/content.js"
-]
+      "js": [
+        "src/parser.js",
+        "src/content.js"
       ]
     }
-  ],
-  "icons": {}
+  ]
 }
