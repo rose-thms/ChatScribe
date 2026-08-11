@@ -1,8 +1,10 @@
 const exportBtn = document.getElementById("exportBtn");
 const status = document.getElementById("status");
+const preview = document.getElementById("preview");
 
 exportBtn.addEventListener("click", async () => {
-  status.textContent = "Checking WhatsApp Web...";
+  status.textContent = "Reading chat...";
+  preview.innerHTML = "";
 
   try {
     const tabs = await chrome.tabs.query({
@@ -28,16 +30,27 @@ exportBtn.addEventListener("click", async () => {
         }
 
         if (!response?.success) {
-          status.textContent = "No messages detected.";
+          status.textContent = response?.error || "Unable to read messages.";
           return;
         }
 
-        const count = response.messages.length;
+        const messages = response.messages || [];
 
-        status.textContent =
-          count > 0
-            ? `${count} messages detected.`
-            : "No visible messages detected.";
+        status.textContent = `${messages.length} messages detected.`;
+
+        messages.slice(0, 10).forEach((message) => {
+          const item = document.createElement("div");
+
+          item.className = "message";
+
+          item.innerHTML = `
+            <strong>${escapeHtml(message.sender || "Unknown")}</strong>
+            <small>${escapeHtml(message.timestamp || "")}</small>
+            <div>${escapeHtml(message.message)}</div>
+          `;
+
+          preview.appendChild(item);
+        });
       }
     );
   } catch (error) {
@@ -45,3 +58,12 @@ exportBtn.addEventListener("click", async () => {
     status.textContent = "Something went wrong.";
   }
 });
+
+function escapeHtml(value) {
+  return String(value)
+    .replaceAll("&", "&amp;")
+    .replaceAll("<", "&lt;")
+    .replaceAll(">", "&gt;")
+    .replaceAll('"', "&quot;")
+    .replaceAll("'", "&#039;");
+}

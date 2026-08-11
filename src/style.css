@@ -35,3 +35,38 @@ button {
   font-size: 13px;
   color: #9ca3af;
 }
+#status {
+  margin-top: 15px;
+  font-size: 13px;
+  color: #9ca3af;
+}
+
+#preview {
+  margin-top: 15px;
+  max-height: 300px;
+  overflow-y: auto;
+}
+
+.message {
+  padding: 10px;
+  margin-bottom: 8px;
+  border-radius: 6px;
+  background: #1f2937;
+}
+
+.message strong {
+  display: block;
+  font-size: 13px;
+}
+
+.message small {
+  display: block;
+  margin: 3px 0;
+  color: #9ca3af;
+  font-size: 10px;
+}
+
+.message div {
+  font-size: 13px;
+  word-break: break-word;
+}
